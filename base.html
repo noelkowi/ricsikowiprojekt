@@ -1,83 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Koncertjegyek</title>
-    <script src="./base.js" defer></script>
-    <link rel="stylesheet" href="./minden.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Koncertjegyek - ArénaVPjegyek</title>
+  <script src="./base.js" defer></script>
+  <link rel="stylesheet" href="./minden.css">
 </head>
 <body>
-<nav class="navbar">
-  <div class="nav-container">
-    <a href="#" class="nav-logo">ArénaVPjegyek</a>
-    
-    <!-- Vezérlők: Keresőmező + Nézetváltó gombok -->
-    <div class="nav-controls">
-      <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Esemény, előadó keresése...">
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">ArénaVPjegyek</a>
+      
+      <!-- Vezérlők: Keresőmező + Nézetváltó gombok -->
+      <div class="nav-controls">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Esemény, előadó keresése...">
+        </div>
+
+        <div class="view-toggle">
+          <button id="cardViewBtn" class="toggle-btn active" title="Kártya nézet">Kártya</button>
+          <button id="tableViewBtn" class="toggle-btn" title="Táblázat nézet">Táblázat</button>
+        </div>
       </div>
 
-      <div class="view-toggle">
-        <button id="cardViewBtn" class="toggle-btn active" title="Kártya nézet">Kártya</button>
-        <button id="listViewBtn" class="toggle-btn" title="Lista nézet">Lista</button>
-      </div>
+      <!-- Legördülő menü -->
+      <ul class="nav-links">
+        <li class="dropdown">
+          <a href="#" class="nav-link dropdown-toggle">
+            Menü <span class="arrow">▾</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Főoldal</a></li>
+            <li><a href="#">Információk</a></li>
+            <li><a href="#">Kosár</a></li>
+          </ul>
+        </li>
+      </ul>
     </div>
+  </nav>
 
-    <!-- Legördülő menü -->
-    <ul class="nav-links">
-      <li class="dropdown">
-        <a href="#" class="nav-link dropdown-toggle">
-          Menü <span class="arrow">▾</span>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Főoldal</a></li>
-          <li><a href="#">Információk</a></li>
-          <li><a href="#">Kosár</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-</nav>
-
-<!-- Események Konténere (alapértelmezetten grid-view / kártya nézet) -->
-<main class="events-container grid-view" id="eventsContainer">
-  <div class="event-card">
-    <div class="event-info">
-      <h3>Tankcsapda Koncert</h3>
-      <p class="date">2026. május 15.</p>
-      <p class="description">Acoustic & Electric Show az Arénában.</p>
-    </div>
-    <button class="btn btn-primary buy-btn">Jegyvásárlás</button>
-  </div>
-
-  <div class="event-card">
-    <div class="event-info">
-      <h3>Halott Pénz</h3>
-      <p class="date">2026. június 20.</p>
-      <p class="description">Hatalmas nyári arénashow és fesztiválhangulat.</p>
-    </div>
-    <button class="btn btn-primary buy-btn">Jegyvásárlás</button>
-  </div>
-
-  <div class="event-card">
-    <div class="event-info">
-      <h3>Azahriah Live</h3>
-      <p class="date">2026. július 10.</p>
-      <p class="description">A legújabb album élő bemutatója.</p>
-    </div>
-    <button class="btn btn-primary buy-btn">Jegyvásárlás</button>
-  </div>
-
-  <div class="event-card">
-    <div class="event-info">
-      <h3>Majka & A Őrkutyák</h3>
-      <p class="date">2026. augusztus 05.</p>
-      <p class="description">Látványos szuperkoncert Veszprémben.</p>
-    </div>
-    <button class="btn btn-primary buy-btn">Jegyvásárlás</button>
-  </div>
-</main>
-
+  <!-- Dinamikus tartalom konténere (a JS tölti fel) -->
+  <main class="events-container" id="eventsContainer"></main>
 </body>
 </html>
