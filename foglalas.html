@@ -56,4 +56,211 @@
     
 </body>
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./minden.css">
+</head>
+<body>
+    <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">ArénaVPjegyek</a>
+      
+      <!-- Vezérlők: Keresőmező + Nézetváltó gombok -->
+      <div class="nav-controls">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Esemény, előadó keresése...">
+        </div>
+
+        <div class="view-toggle">
+          <button id="cardViewBtn" class="toggle-btn active" title="Kártya nézet">Kártya</button>
+          <button id="tableViewBtn" class="toggle-btn" title="Táblázat nézet">Táblázat</button>
+        </div>
+      </div>
+
+      <!-- Legördülő menü -->
+      <ul class="nav-links">
+        <li class="dropdown">
+          <a href="#" class="nav-link dropdown-toggle">
+            Menü <span class="arrow">▾</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="./base.html">Főoldal</a></li>
+            <li><a href="./infok.html">Információk</a></li>
+            <li><a href="./kosar.html">Kosár</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- SZÍNPAD / KÉPERNYŐ -->
+<div class="stage">SZÍNPAD</div>
+
+
+<!-- ZÓNA: VIP (Első sorok) -->
+<div class="seat-zone vip-zone">
+  <div class="row-label">VIP 1</div>
+  <div class="seat-row">
+    <button type="button" class="seat vip" data-seat="V1-1" data-price="25000" title="VIP 1. sor 1. szék - 25 000 Ft"></button>
+    <button type="button" class="seat vip" data-seat="V1-2" data-price="25000" title="VIP 1. sor 2. szék - 25 000 Ft"></button>
+    <button type="button" class="seat vip" data-seat="V1-3" data-price="25000" title="VIP 1. sor 3. szék - 25 000 Ft"></button>
+    <button type="button" class="seat vip" data-seat="V1-4" data-price="25000" title="VIP 1. sor 4. szék - 25 000 Ft"></button>
+    <div class="aisle"></div>
+    <button type="button" class="seat vip" data-seat="V1-5" data-price="25000" title="VIP 1. sor 5. szék - 25 000 Ft"></button>
+    <button type="button" class="seat vip" data-seat="V1-6" data-price="25000" title="VIP 1. sor 6. szék - 25 000 Ft"></button>
+    <button type="button" class="seat vip" data-seat="V1-7" data-price="25000" title="VIP 1. sor 7. szék - 25 000 Ft"></button>
+    <button type="button" class="seat vip" data-seat="V1-8" data-price="25000" title="VIP 1. sor 8. szék - 25 000 Ft"></button>
+  </div>
+
+  <div class="row-label">VIP 2</div>
+  <div class="seat-row">
+    <button type="button" class="seat vip" data-seat="V2-1" data-price="25000" title="VIP 2. sor 1. szék - 25 000 Ft"></button>
+    <button type="button" class="seat vip" data-seat="V2-2" data-price="25000" title="VIP 2. sor 2. szék - 25 000 Ft"></button>
+    <button type="button" class="seat vip" data-seat="V2-3" data-price="25000" title="VIP 2. sor 3. szék - 25 000 Ft"></button>
+    <button type="button" class="seat vip" data-seat="V2-4" data-price="25000" title="VIP 2. sor 4. szék - 25 000 Ft"></button>
+    <div class="aisle"></div>
+    <button type="button" class="seat vip" data-seat="V2-5" data-price="25000" title="VIP 2. sor 5. szék - 25 000 Ft"></button>
+    <button type="button" class="seat vip" data-seat="V2-6" data-price="25000" title="VIP 2. sor 6. szék - 25 000 Ft"></button>
+    <button type="button" class="seat vip" data-seat="V2-7" data-price="25000" title="VIP 2. sor 7. szék - 25 000 Ft"></button>
+    <button type="button" class="seat vip" data-seat="V2-8" data-price="25000" title="VIP 2. sor 8. szék - 25 000 Ft"></button>
+  </div>
+</div>
+
+<!-- ZÓNA: NORMÁL NÉZŐTÉR -->
+<div class="seat-zone standard-zone">
+  <div class="row-label">1. SOR</div>
+  <div class="seat-row">
+    <button type="button" class="seat standard" data-seat="A-1" data-price="18000"></button>
+    <button type="button" class="seat standard" data-seat="A-2" data-price="18000"></button>
+    <button type="button" class="seat standard" data-seat="A-3" data-price="18000"></button>
+    <button type="button" class="seat standard" data-seat="A-4" data-price="18000"></button>
+    <button type="button" class="seat standard" data-seat="A-5" data-price="18000"></button>
+    <button type="button" class="seat standard" data-seat="A-6" data-price="18000"></button>
+    <div class="aisle"></div>
+    <button type="button" class="seat standard" data-seat="A-7" data-price="18000"></button>
+    <button type="button" class="seat standard" data-seat="A-8" data-price="18000"></button>
+    <button type="button" class="seat standard" data-seat="A-9" data-price="18000"></button>
+    <button type="button" class="seat standard" data-seat="A-10" data-price="18000"></button>
+    <button type="button" class="seat standard" data-seat="A-11" data-price="18000"></button>
+    <button type="button" class="seat standard" data-seat="A-12" data-price="18000"></button>
+  </div>
+
+  <div class="row-label">2. SOR</div>
+  <div class="seat-row">
+    <button type="button" class="seat standard" data-seat="B-1" data-price="18000"></button>
+    <button type="button" class="seat standard" data-seat="B-3" data-price="18000"></button>
+    <button type="button" class="seat standard" data-seat="B-2" data-price="18000"></button>
+    <button type="button" class="seat standard" data-seat="B-4" data-price="18000"></button>
+    <button type="button" class="seat standard" data-seat="B-5" data-price="18000"></button>
+    <button type="button" class="seat standard" data-seat="B-6" data-price="18000"></button>
+    <div class="aisle"></div>
+    <button type="button" class="seat standard" data-seat="B-7" data-price="18000"></button>
+    <button type="button" class="seat standard" data-seat="B-8" data-price="18000"></button>
+    <button type="button" class="seat standard" data-seat="B-9" data-price="18000"></button>
+    <button type="button" class="seat standard" data-seat="B-10" data-price="18000"></button>
+    <button type="button" class="seat standard" data-seat="B-11" data-price="18000"></button>
+    <button type="button" class="seat standard" data-seat="B-12" data-price="18000"></button>
+  </div>
+
+  <div class="row-label">3. SOR</div>
+  <div class="seat-row">
+    <button type="button" class="seat standard" data-seat="C-1" data-price="18000"></button>
+    <button type="button" class="seat standard" data-seat="C-2" data-price="18000"></button>
+    <button type="button" class="seat standard" data-seat="C-3" data-price="18000"></button>
+    <button type="button" class="seat standard" data-seat="C-4" data-price="18000"></button>
+    <button type="button" class="seat standard" data-seat="C-5" data-price="18000"></button>
+    <button type="button" class="seat standard" data-seat="C-6" data-price="18000"></button>
+    <div class="aisle"></div>
+    <button type="button" class="seat standard" data-seat="C-7" data-price="18000"></button>
+    <button type="button" class="seat standard" data-seat="C-8" data-price="18000"></button>
+    <button type="button" class="seat standard" data-seat="C-9" data-price="18000"></button>
+    <button type="button" class="seat standard" data-seat="C-10" data-price="18000"></button>
+    <button type="button" class="seat standard" data-seat="C-11" data-price="18000"></button>
+    <button type="button" class="seat standard" data-seat="C-12" data-price="18000"></button>
+  </div>
+</div>
+
+<!-- ZÓNA: ERBÉLY / KEDVEZMÉNYES (Hátsó sorok) -->
+<div class="seat-zone economy-zone">
+  <div class="row-label">4. SOR</div>
+  <div class="seat-row">
+    <button type="button" class="seat economy" data-seat="D-1" data-price="12000"></button>
+    <button type="button" class="seat economy" data-seat="D-2" data-price="12000"></button>
+    <button type="button" class="seat economy" data-seat="D-3" data-price="12000"></button>
+    <button type="button" class="seat economy" data-seat="D-4" data-price="12000"></button>
+    <button type="button" class="seat economy" data-seat="D-5" data-price="12000"></button>
+    <button type="button" class="seat economy" data-seat="D-6" data-price="12000"></button>
+    <div class="aisle"></div>
+    <button type="button" class="seat economy" data-seat="D-7" data-price="12000"></button>
+    <button type="button" class="seat economy" data-seat="D-8" data-price="12000"></button>
+    <button type="button" class="seat economy" data-seat="D-9" data-price="12000"></button>
+    <button type="button" class="seat economy" data-seat="D-10" data-price="12000"></button>
+    <button type="button" class="seat economy" data-seat="D-11" data-price="12000"></button>
+    <button type="button" class="seat economy" data-seat="D-12" data-price="12000"></button>
+  </div>
+
+  <div class="row-label">5. SOR</div>
+  <div class="seat-row">
+    <button type="button" class="seat economy" data-seat="E-1" data-price="12000"></button>
+    <button type="button" class="seat economy" data-seat="E-2" data-price="12000"></button>
+    <button type="button" class="seat economy" data-seat="E-3" data-price="12000"></button>
+    <button type="button" class="seat economy" data-seat="E-4" data-price="12000"></button>
+    <button type="button" class="seat economy" data-seat="E-5" data-price="12000"></button>
+    <button type="button" class="seat economy" data-seat="E-6" data-price="12000"></button>
+    <div class="aisle"></div>
+    <button type="button" class="seat economy" data-seat="E-7" data-price="12000"></button>
+    <button type="button" class="seat economy" data-seat="E-8" data-price="12000"></button>
+    <button type="button" class="seat economy" data-seat="E-9" data-price="12000"></button>
+    <button type="button" class="seat economy" data-seat="E-10" data-price="12000"></button>
+    <button type="button" class="seat economy" data-seat="E-11" data-price="12000"></button>
+    <button type="button" class="seat economy" data-seat="E-12" data-price="12000"></button>
+  </div>
+</div>
+
+<!-- SZÉK JELMAGYARÁZAT ÉS ÁRAK -->
+<div class="legend-container">
+  <div class="legend-item">
+    <div class="seat vip"></div>
+    <div class="legend-info">
+      <span class="legend-title">VIP Zóna</span>
+      <span class="legend-price">25 000 Ft</span>
+    </div>
+  </div>
+
+  <div class="legend-item">
+    <div class="seat standard"></div>
+    <div class="legend-info">
+      <span class="legend-title">Normál Zóna</span>
+      <span class="legend-price">18 000 Ft</span>
+    </div>
+  </div>
+
+  <div class="legend-item">
+    <div class="seat economy"></div>
+    <div class="legend-info">
+      <span class="legend-title">Kedvezményes</span>
+      <span class="legend-price">12 000 Ft</span>
+    </div>
+  </div>
+
+  <div class="legend-item">
+    <div class="seat selected"></div>
+    <div class="legend-info">
+      <span class="legend-title">Kijelölve</span>
+      <span class="legend-price">Saját választás</span>
+    </div>
+  </div>
+
+  <div class="legend-item">
+    <div class="seat occupied"></div>
+    <div class="legend-info">
+      <span class="legend-title">Foglalt</span>
+      <span class="legend-price">Nem foglalható</span>
+    </div>
+  </div>
+</div>
+    
+</body>
 </html>

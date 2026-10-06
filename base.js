@@ -1,10 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Események adatai
   const events = [
-    { title: 'Tankcsapda Koncert', date: '2026. május 15.', description: 'Acoustic & Electric Show az Arénában.' },
-    { title: 'Halott Pénz', date: '2026. június 20.', description: 'Hatalmas nyári arénashow és fesztiválhangulat.' },
-    { title: 'Azahriah Live', date: '2026. július 10.', description: 'A legújabb album élő bemutatója.' },
-    { title: 'Majka & A Őrkutyák', date: '2026. augusztus 05.', description: 'Látványos szuperkoncert Veszprémben.' }
+    { title: 'Tankcsapda Koncert', date: '2027. május 15.', description: 'Acoustic & Electric Show az Arénában.' },
+    { title: 'Halott Pénz', date: '2027. június 20.', description: 'Hatalmas nyári arénashow és fesztiválhangulat.' },
+    { title: 'Azahriah Live', date: '2027. július 10.', description: 'A legújabb album élő bemutatója.' },
+    { title: 'Majka & A Őrkutyák', date: '2027. augusztus 05.', description: 'Látványos szuperkoncert Veszprémben.' },
+    { title: 'Dzsúdló', date: '2027. május 23.', description: 'Robbanásszerű energiák és dallamos pop-hiphop dallamok a veszprémi közönségnek.'},
+    { title: 'Krúbi', date: '2027. június 12.', description: 'Kritikus szövegek, extravagáns show és felejthetetlen vizuális élmény.'},
+    { title: 'Sisi', date: '2027. június 27.', description: 'A hazai underground hiphop legújabb hulláma és vagány, dögös ritmusok.'},
+    { title: 'Charlie', date: '2027. július 11.', description: 'A legendás rekedtes hang, örökzöld rock- és jazz slágerek egy különleges estén.'},
+    { title: 'Pogany Indulo', date: '2027. augusztus 19.', description: 'Nyers, őszinte old-school rap és elképesztő arénahangulat a vár tövében.'},
+    { title: 'Parno Graszt', date: '2027. szeptember 04.', description: 'Hamisítatlan tradíció, kitörő életöröm és fergeteges oláh cigány zene.'}
+
+    
   ];
 
   let currentView = 'card'; // 'card' vagy 'table'
