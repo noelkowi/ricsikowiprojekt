@@ -42,9 +42,20 @@
                 <label for="datum" class="form-label">Foglalás dátuma</label>
                 <input type="date" class="form-control" id="datum" name="datum" required>
             </div>
+            <div class="mb-3">
+                <label for="darab" class="form-label">Darab jegy</label>
+                <input type="number" class="form-control" id="darab" name="darab" required>
+            </div>
         </form>
-        <label for="tipus" class="form-label">Kedvezmény</label>
-        <select id="tipus" name="tipus" class="form-select" required>
+        <label for="jegytipus" class="form-label">Jegytípus</label>
+        <select id="jegytipus" name="jegytipus" class="form-select" required>
+            <option value=""></option>
+            <option>VIP zóna 25 000 Ft</option>
+            <option>Normál zóna 18 000 Ft</option>
+            <option>Kedvezményes zóna 12 000 Ft</option>
+        </select><br>
+        <label for="kedvezmeny" class="form-label">Kedvezmény</label>
+        <select id="kedvezmeny" name="kedvezmeny" class="form-select" required>
             <option value="">Nincs</option>
             <option>Gyerekjegy 15%</option>
             <option>Diákjegy 20%</option>
@@ -224,5 +235,9 @@
 <div class="kuldes">
   <button type="submit" class="btn btn-primary">Foglalás elküldése</button>
 </div>
+
+<h4>
+    Végösszeg: <span id="totalPrice">0 Ft</span>
+</h4>
 </body>
 </html>

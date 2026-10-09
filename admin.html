@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin oldal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script src="./base.js" defer></script>
+    <link rel="stylesheet" href="./minden.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">ArénaVPjegyek - Admin</a>
+        </div>
+        <div>
+            <a href="base.html" class="btn btn-outline-light">Vissza a főoldalra</a>
+        </div>
+    </nav>
+
+    <main class="container mt-4">
+
+        <div class="mt-4">
+            <h2>Beküldött foglalások kezelése</h2>
+            <button class="btn btn-primary mb-2" id="addEventBtn">Foglalás Törlése</button>
+            <div id="eventsList" class="list-group"></div>
+        </div>
+
+        <div class="mt-4">
+            <h2>Felhasználói adatok kezelése</h2>
+            <button class="btn btn-primary mb-2" id="viewUsersBtn">Felhasználók megtekintése</button>
+            <div id="usersList" class="list-group"></div>
+        </div>
+</body>
+
+</html>
