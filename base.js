@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <p class="date">${event.date}</p>
             <p class="description">${event.description}</p>
           </div>
-          <button class="btn-primary buy-btn">Jegyvásárlás</button>
+          <button class="btn-primary buy-btn" onclick="window.location.href='foglalas.html'">Jegyvásárlás</button>
         `;
         eventsContainer.appendChild(card);
       });
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <td class="event-title-cell">${event.title}</td>
               <td class="event-date-cell">${event.date}</td>
               <td>${event.description}</td>
-              <td><button class="btn-primary buy-btn">Jegyvásárlás</button></td>
+              <td><button class="btn-primary buy-btn" onclick="window.location.href='foglalas.html'">Jegyvásárlás</button></td>
             </tr>
           `).join('')}
         </tbody>
