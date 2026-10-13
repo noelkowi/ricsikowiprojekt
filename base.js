@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             alert('A foglalás sikeresen a kosárba került!');
             // Átirányítás a foglalás eredmény oldalra
-            window.location.href = 'foglalas_eredmeny.html';
+            window.location.href = 'kosar.html';
         });
     }
 });
