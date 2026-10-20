@@ -61,14 +61,13 @@
                     <p><strong>Név:</strong> ${data.nev}</p>
                     <p><strong>E-mail:</strong> ${data.email}</p>
                     <p><strong>Telefonszám:</strong> ${data.telefonszam}</p>
-                    <p><strong>Dátum:</strong> ${data.datum}</p>
                     <p><strong>Kiválasztott ülőhelyek:</strong> ${data.helyek.length > 0 ? data.helyek.join(', ') : 'Nincs'}</p>
                     <p><strong>Állójegyek száma:</strong> ${data.allojegyekSzama > 0 ? data.allojegyekSzama + ' db' : 'Nincs'}</p>
                     <p><strong>Kedvezmény:</strong> ${data.kedvezmeny}</p>
                     <h4 class="mt-3 text-success">Végösszeg: ${data.vegosszeg}</h4>
                     
                     <div class="mt-4 text-end">
-                        <button id="payBtn" class="btn btn-success btn-lg">Fizetés szimulálása (${data.vegosszeg})</button>
+                        <button id="payBtn" class="btn btn-success btn-lg">Fizetés (${data.vegosszeg})</button>
                     </div>
                 `;
 

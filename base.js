@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // ==========================================
-  // --- 1. RÉSZ: FŐOLDAL LOGIKA ---
+  // --- 1. RÉSZ: FŐOLDAL LOGIKA (Biztonságos JSON / Fallback betöltés) ---
   // ==========================================
   const eventsContainer = document.getElementById('eventsContainer');
   
@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Belépéskor a főoldalra töröljük a korábban ragadt koncertet, hogy tiszta lappal induljon
     localStorage.removeItem('selectedEvent');
 
-    const events = [
+    // Beépített alapkoncertek (ha a fetch esetleg nem futna le lokálisan)
+    const fallbackEvents = [
       { title: 'Tankcsapda Koncert', date: '2027. május 15.', description: 'Acoustic & Electric Show az Arénában.' },
       { title: 'Halott Pénz', date: '2027. június 20.', description: 'Hatalmas nyári arénashow és fesztiválhangulat.' },
       { title: 'Azahriah Live', date: '2027. július 10.', description: 'A legújabb album élő bemutatója.' },
@@ -22,12 +23,29 @@ document.addEventListener('DOMContentLoaded', () => {
       { title: 'Parno Graszt', date: '2027. szeptember 04.', description: 'Hamisítatlan tradíció, kitörő életöröm és fergeteges oláh cigány zene.'}
     ];
 
+    let events = []; 
     let currentView = 'card'; // 'card' vagy 'table'
     let filterText = '';
 
     const searchInput = document.getElementById('searchInput');
     const cardViewBtn = document.getElementById('cardViewBtn');
     const tableViewBtn = document.getElementById('tableViewBtn');
+
+    // Megpróbáljuk betölteni a JSON-t, de ha hiba van, csendben átveszi a fallback lista
+    fetch('koncertek.json')
+      .then(response => {
+        if (!response.ok) throw new Error('Nem 200-as válasz');
+        return response.json();
+      })
+      .then(data => {
+        events = data;
+        renderEvents();
+      })
+      .catch(() => {
+        // Hiba esetén sem írunk ki semmit, hanem azonnal betöltjük az alap adatokat!
+        events = fallbackEvents;
+        renderEvents();
+      });
 
     function renderEvents() {
       const filteredEvents = events.filter(event => {
@@ -113,8 +131,6 @@ document.addEventListener('DOMContentLoaded', () => {
         renderEvents();
       });
     }
-
-    renderEvents();
   }
 
 
@@ -129,13 +145,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const selectedEventTitleSpan = document.getElementById('selectedEventTitle');
 
   if (seats.length > 0 || standingDarabInput) {
-    // Kiírjuk a kiválasztott koncert nevét a foglalási címbe, ha van
     const currentEvent = localStorage.getItem('selectedEvent');
     if (selectedEventTitleSpan) {
         selectedEventTitleSpan.textContent = currentEvent ? `- ${currentEvent}` : '(Nincs koncert kiválasztva)';
     }
 
-    // Kedvezmények mértéke %-ban
     const discounts = {
         'Gyerekjegy 15%': 0.15,
         'Diákjegy 20%': 0.20,
@@ -143,10 +157,9 @@ document.addEventListener('DOMContentLoaded', () => {
         'Csoportos jegy 15%': 0.15
     };
 
-    const STANDING_PRICE = 10000; // Állójegy ára darabonként
+    const STANDING_PRICE = 10000;
     let selectedSeats = [];
 
-    // Ülőhelyek kattintásának kezelése
     seats.forEach(seat => {
         seat.addEventListener('click', () => {
             if (seat.classList.contains('occupied')) return;
@@ -169,36 +182,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Ha változik az állójegy darabszáma
     if (standingDarabInput) {
         standingDarabInput.addEventListener('input', updateTotalAndCount);
     }
 
-    // Ha változik a kedvezmény kiválasztása
     if (kedvezmenySelect) {
         kedvezmenySelect.addEventListener('change', updateTotalAndCount);
     }
 
-    // Fő számoló és frissítő függvény
     function updateTotalAndCount() {
         const selectedDiscountText = kedvezmenySelect ? kedvezmenySelect.value : '';
         const discountRate = discounts[selectedDiscountText] || 0;
         
         const standingCount = standingDarabInput ? parseInt(standingDarabInput.value) || 0 : 0;
 
-        // Teljes jegyszám (ülök + állók)
         const totalTickets = selectedSeats.length + standingCount;
         if (darabInput) {
             darabInput.value = totalTickets;
         }
 
-        // Végösszeg számítása ülőhelyekre
         let total = 0;
         selectedSeats.forEach(seat => {
             total += seat.basePrice * (1 - discountRate);
         });
 
-        // Végösszeg számítása állójegyekre
         total += (standingCount * STANDING_PRICE) * (1 - discountRate);
 
         if (totalPriceElement) {
@@ -206,7 +213,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Foglalás / Kosárba rakás elküldése
     const submitBtn = document.querySelector('.kuldes button');
     if (submitBtn) {
         submitBtn.addEventListener('click', (e) => {
@@ -222,31 +228,26 @@ document.addEventListener('DOMContentLoaded', () => {
             const nev = document.getElementById('nev')?.value;
             const email = document.getElementById('email')?.value;
             const telefonszam = document.getElementById('telefonszam')?.value;
-            const datum = document.getElementById('datum')?.value;
 
-            if (!nev || !email || !telefonszam || !datum) {
+            if (!nev || !email || !telefonszam) {
                 alert('Kérjük, töltse ki az összes személyes adatot!');
                 return;
             }
 
-            // Kosár adatok összeállítása
             const bookingData = {
                 koncert: currentEvent || 'Ismeretlen koncert',
                 nev: nev,
                 email: email,
                 telefonszam: telefonszam,
-                datum: datum,
                 helyek: selectedSeats.map(s => s.id),
                 allojegyekSzama: standingCount,
                 kedvezmeny: kedvezmenySelect.value || 'Nincs',
                 vegosszeg: totalPriceElement.textContent
             };
 
-            // Mentés a localStorage-ba
             localStorage.setItem('kosar', JSON.stringify(bookingData));
 
             alert('A foglalás sikeresen a kosárba került!');
-            // Átirányítás a kosár oldalra
             window.location.href = 'kosar.html';
         });
     }
