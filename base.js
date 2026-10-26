@@ -1,37 +1,33 @@
 document.addEventListener('DOMContentLoaded', () => {
-
   // ==========================================
-  // --- 1. RÉSZ: FŐOLDAL LOGIKA (Biztonságos JSON / Fallback betöltés) ---
+  // 1. FŐOLDAL: Események listázása és keresés
   // ==========================================
   const eventsContainer = document.getElementById('eventsContainer');
-  
+
   if (eventsContainer) {
-    // Belépéskor a főoldalra töröljük a korábban ragadt koncertet, hogy tiszta lappal induljon
     localStorage.removeItem('selectedEvent');
 
-    // Beépített alapkoncertek (ha a fetch esetleg nem futna le lokálisan)
     const fallbackEvents = [
       { title: 'Tankcsapda Koncert', date: '2027. május 15.', description: 'Acoustic & Electric Show az Arénában.' },
       { title: 'Halott Pénz', date: '2027. június 20.', description: 'Hatalmas nyári arénashow és fesztiválhangulat.' },
       { title: 'Azahriah Live', date: '2027. július 10.', description: 'A legújabb album élő bemutatója.' },
       { title: 'Majka & A Őrkutyák', date: '2027. augusztus 05.', description: 'Látványos szuperkoncert Veszprémben.' },
-      { title: 'Dzsúdló', date: '2027. május 23.', description: 'Robbanásszerű energiák és dallamos pop-hiphop dallamok a veszprémi közönségnek.'},
-      { title: 'Krúbi', date: '2027. június 12.', description: 'Kritikus szövegek, extravagáns show és felejthetetlen vizuális élmény.'},
-      { title: 'Sisi', date: '2027. június 27.', description: 'A hazai underground hiphop legújabb hulláma és vagány, dögös ritmusok.'},
-      { title: 'Charlie', date: '2027. július 11.', description: 'A legendás rekedtes hang, örökzöld rock- és jazz slágerek egy különleges estén.'},
-      { title: 'Pogany Indulo', date: '2027. augusztus 19.', description: 'Nyers, őszinte old-school rap és elképesztő arénahangulat a vár tövében.'},
-      { title: 'Parno Graszt', date: '2027. szeptember 04.', description: 'Hamisítatlan tradíció, kitörő életöröm és fergeteges oláh cigány zene.'}
+      { title: 'Dzsúdló', date: '2027. május 23.', description: 'Robbanásszerű energiák és dallamos pop-hiphop dallamok a veszprémi közönségnek.' },
+      { title: 'Krúbi', date: '2027. június 12.', description: 'Kritikus szövegek, extravagáns show és felejthetetlen vizuális élmény.' },
+      { title: 'Sisi', date: '2027. június 27.', description: 'A hazai underground hiphop legújabb hulláma és vagány, dögös ritmusok.' },
+      { title: 'Charlie', date: '2027. július 11.', description: 'A legendás rekedtes hang, örökzöld rock- és jazz slágerek egy különleges estén.' },
+      { title: 'Pogany Indulo', date: '2027. augusztus 19.', description: 'Nyers, őszinte old-school rap és elképesztő arénahangulat a vár tövében.' },
+      { title: 'Parno Graszt', date: '2027. szeptember 04.', description: 'Hamisítatlan tradíció, kitörő életöröm és fergeteges oláh cigány zene.' }
     ];
 
-    let events = []; 
-    let currentView = 'card'; // 'card' vagy 'table'
+    let events = [];
+    let currentView = 'card';
     let filterText = '';
 
     const searchInput = document.getElementById('searchInput');
     const cardViewBtn = document.getElementById('cardViewBtn');
     const tableViewBtn = document.getElementById('tableViewBtn');
 
-    // Megpróbáljuk betölteni a JSON-t, de ha hiba van, csendben átveszi a fallback lista
     fetch('koncertek.json')
       .then(response => {
         if (!response.ok) throw new Error('Nem 200-as válasz');
@@ -42,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
         renderEvents();
       })
       .catch(() => {
-        // Hiba esetén sem írunk ki semmit, hanem azonnal betöltjük az alap adatokat!
         events = fallbackEvents;
         renderEvents();
       });
@@ -61,9 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       if (currentView === 'card') {
-        // KÁRTYÁS NÉZET
         eventsContainer.className = 'events-container grid-view';
-        
         filteredEvents.forEach(event => {
           const card = document.createElement('div');
           card.className = 'event-card';
@@ -77,14 +70,10 @@ document.addEventListener('DOMContentLoaded', () => {
           `;
           eventsContainer.appendChild(card);
         });
-
       } else {
-        // TÁBLÁZATOS NÉZET
         eventsContainer.className = 'events-container table-view';
-
         const table = document.createElement('table');
         table.className = 'events-table';
-        
         table.innerHTML = `
           <thead>
             <tr>
@@ -133,9 +122,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-
   // ==========================================
-  // --- 2. RÉSZ: FOGLALÁSI OLDAL LOGIKA ---
+  // 2. FOGLALÁS OLDAL: Ülőhelyek, állójegyek, számítás
   // ==========================================
   const seats = document.querySelectorAll('.seat');
   const kedvezmenySelect = document.getElementById('kedvezmeny');
@@ -147,110 +135,108 @@ document.addEventListener('DOMContentLoaded', () => {
   if (seats.length > 0 || standingDarabInput) {
     const currentEvent = localStorage.getItem('selectedEvent');
     if (selectedEventTitleSpan) {
-        selectedEventTitleSpan.textContent = currentEvent ? `- ${currentEvent}` : '(Nincs koncert kiválasztva)';
+      selectedEventTitleSpan.textContent = currentEvent ? `- ${currentEvent}` : '(Nincs koncert kiválasztva)';
     }
 
     const discounts = {
-        'Gyerekjegy 15%': 0.15,
-        'Diákjegy 20%': 0.20,
-        'Nyugdíjasjegy 20%': 0.20,
-        'Csoportos jegy 15%': 0.15
+      'Gyerekjegy 15%': 0.15,
+      'Diákjegy 20%': 0.20,
+      'Nyugdíjasjegy 20%': 0.20,
+      'Csoportos jegy 15%': 0.15
     };
 
     const STANDING_PRICE = 10000;
     let selectedSeats = [];
+    let currentNumericTotal = 0;
 
     seats.forEach(seat => {
-        seat.addEventListener('click', () => {
-            if (seat.classList.contains('occupied')) return;
+      seat.addEventListener('click', () => {
+        if (seat.classList.contains('occupied')) return;
 
-            const seatId = seat.getAttribute('data-seat');
-            const seatPrice = parseInt(seat.getAttribute('data-price')) || 0;
+        const seatId = seat.getAttribute('data-seat');
+        const seatPrice = parseInt(seat.getAttribute('data-price')) || 0;
 
-            if (seat.classList.contains('selected')) {
-                seat.classList.remove('selected');
-                selectedSeats = selectedSeats.filter(item => item.id !== seatId);
-            } else {
-                seat.classList.add('selected');
-                selectedSeats.push({
-                    id: seatId,
-                    basePrice: seatPrice
-                });
-            }
+        if (seat.classList.contains('selected')) {
+          seat.classList.remove('selected');
+          selectedSeats = selectedSeats.filter(item => item.id !== seatId);
+        } else {
+          seat.classList.add('selected');
+          selectedSeats.push({ id: seatId, basePrice: seatPrice });
+        }
 
-            updateTotalAndCount();
-        });
+        updateTotalAndCount();
+      });
     });
 
     if (standingDarabInput) {
-        standingDarabInput.addEventListener('input', updateTotalAndCount);
+      standingDarabInput.addEventListener('input', updateTotalAndCount);
     }
 
     if (kedvezmenySelect) {
-        kedvezmenySelect.addEventListener('change', updateTotalAndCount);
+      kedvezmenySelect.addEventListener('change', updateTotalAndCount);
     }
 
     function updateTotalAndCount() {
-        const selectedDiscountText = kedvezmenySelect ? kedvezmenySelect.value : '';
-        const discountRate = discounts[selectedDiscountText] || 0;
-        
-        const standingCount = standingDarabInput ? parseInt(standingDarabInput.value) || 0 : 0;
+      const selectedDiscountText = kedvezmenySelect ? kedvezmenySelect.value : '';
+      const discountRate = discounts[selectedDiscountText] || 0;
+      const standingCount = standingDarabInput ? parseInt(standingDarabInput.value) || 0 : 0;
 
-        const totalTickets = selectedSeats.length + standingCount;
-        if (darabInput) {
-            darabInput.value = totalTickets;
-        }
+      const totalTickets = selectedSeats.length + standingCount;
+      if (darabInput) {
+        darabInput.value = totalTickets;
+      }
 
-        let total = 0;
-        selectedSeats.forEach(seat => {
-            total += seat.basePrice * (1 - discountRate);
-        });
+      let total = 0;
+      selectedSeats.forEach(seat => {
+        total += seat.basePrice * (1 - discountRate);
+      });
 
-        total += (standingCount * STANDING_PRICE) * (1 - discountRate);
+      total += (standingCount * STANDING_PRICE) * (1 - discountRate);
+      currentNumericTotal = Math.round(total);
 
-        if (totalPriceElement) {
-            totalPriceElement.textContent = `${Math.round(total).toLocaleString('hu-HU')} Ft`;
-        }
+      if (totalPriceElement) {
+        totalPriceElement.textContent = `${currentNumericTotal.toLocaleString('hu-HU')} Ft`;
+      }
     }
 
     const submitBtn = document.querySelector('.kuldes button');
     if (submitBtn) {
-        submitBtn.addEventListener('click', (e) => {
-            e.preventDefault();
+      submitBtn.addEventListener('click', (e) => {
+        e.preventDefault();
 
-            const standingCount = standingDarabInput ? parseInt(standingDarabInput.value) || 0 : 0;
+        const standingCount = standingDarabInput ? parseInt(standingDarabInput.value) || 0 : 0;
 
-            if (selectedSeats.length === 0 && standingCount === 0) {
-                alert('Kérjük, válasszon ki legalább egy ülőhelyet vagy adjon meg állójegyet!');
-                return;
-            }
+        if (selectedSeats.length === 0 && standingCount === 0) {
+          alert('Kérjük, válasszon ki legalább egy ülőhelyet vagy adjon meg állójegyet!');
+          return;
+        }
 
-            const nev = document.getElementById('nev')?.value;
-            const email = document.getElementById('email')?.value;
-            const telefonszam = document.getElementById('telefonszam')?.value;
+        const nev = document.getElementById('nev')?.value;
+        const email = document.getElementById('email')?.value;
+        const telefonszam = document.getElementById('telefonszam')?.value;
 
-            if (!nev || !email || !telefonszam) {
-                alert('Kérjük, töltse ki az összes személyes adatot!');
-                return;
-            }
+        if (!nev || !email || !telefonszam) {
+          alert('Kérjük, töltse ki az összes személyes adatot!');
+          return;
+        }
 
-            const bookingData = {
-                koncert: currentEvent || 'Ismeretlen koncert',
-                nev: nev,
-                email: email,
-                telefonszam: telefonszam,
-                helyek: selectedSeats.map(s => s.id),
-                allojegyekSzama: standingCount,
-                kedvezmeny: kedvezmenySelect.value || 'Nincs',
-                vegosszeg: totalPriceElement.textContent
-            };
+        // Tiszta formátumú adatok elmentése a kosárba
+        const bookingData = {
+          koncert: currentEvent,
+          nev: nev,
+          email: email,
+          telefonszam: telefonszam,
+          helyek: selectedSeats.map(s => s.id),
+          allojegyekSzama: standingCount,
+          kedvezmeny: kedvezmenySelect.value || 'Nincs',
+          vegosszegSzam: currentNumericTotal
+        };
 
-            localStorage.setItem('kosar', JSON.stringify(bookingData));
+        localStorage.setItem('kosar', JSON.stringify(bookingData));
 
-            alert('A foglalás sikeresen a kosárba került!');
-            window.location.href = 'kosar.html';
-        });
+        alert('A foglalás sikeresen a kosárba került!');
+        window.location.href = 'kosar.html';
+      });
     }
   }
-
 });
